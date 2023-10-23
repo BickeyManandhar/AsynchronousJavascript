@@ -1,7 +1,7 @@
 # AsynchronousJavascript
 Basic Asynchronou JS
 
-project-1.html
+project-1.html and project-1.js
 
  Here's a breakdown of what each button does:
 
