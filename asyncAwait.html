@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Async / Await</title>
+</head>
+<body>
+  <script>
+    let stocks = {
+      fruits: ["strawberry", "grapes", "banana", "apple"],
+      liquid: ["water", "ice"],
+      holder: ["cone", "cup", "stick"],
+      toppings: ["chocolate", "peanuts"],
+    }
+
+    let isShopOpen = true; //true will resolve and false will reject
+
+    //writing async await
+    let toppings_choice = ()=>{
+      return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+          resolve(console.log("Which topping would you like?"));
+        },3000);
+      });
+    }
+
+    async function kitchen(){
+      console.log(" A ");
+      console.log(" B ");
+      console.log(" C ");
+      await toppings_choice();//2.await for the function
+      console.log(" D ");//4. when await is done, it comes back and print these
+      console.log(" E ");
+
+    }
+
+    kitchen(); //1. we call this function
+
+    console.log("Doing the dishes") //3. by the mean time this will print
+    console.log("Cleaning the table")
+    console.log("Taking others order")
+
+
+
+  </script>
+</body>
+</html>
