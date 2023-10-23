@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise - Solution to Callback Hell</title>
+</head>
+
+<body>
+  <script>
+    //Promise Cycle
+    /*
+
+    1-promise is made
+    2-Either resolve or Reject
+      2.1-If resolve
+        2.1.1-.then
+        2.1.1-.then
+      2.2-If reject
+        2.2.1-.catch
+    3- finally
+
+    */
+
+    let stocks = {
+      fruits: ["strawberry", "grapes", "banana", "apple"],
+      liquid: ["water", "ice"],
+      holder: ["cone", "cup", "stick"],
+      toppings: ["chocolate", "peanuts"],
+    }
+
+    let isShopOpen = true; //true will resolve and false will reject
+
+    let order = (time, work) => {
+
+      return new Promise((resolve, reject) => {
+        if (isShopOpen) {
+          setTimeout(() => {
+            resolve(work());
+          }, time);
+
+        } else {
+          reject(console.log("Our shop is closed."));
+        }
+      });
+    };
+
+    order(2000, () => console.log(`${stocks.fruits[0]} was seleceted.`))
+
+      //runs only when resolve
+      .then(() => {
+        return order(0, () => { console.log("Production has started.") });
+      })
+
+      .then(() => {
+        return order(2000, () => console.log("The fruit was chopped"));
+      })
+
+      .then(() => {
+        return order(1000, () => { console.log(`${stocks.liquid[0]} and ${stocks.liquid[1]} were added.`) });
+      })
+
+      .then(() => {
+        return order(1000, () => { console.log("Machine has started...") });
+      })
+
+      .then(() => {
+        return order(2000, () => { console.log(`Holder: ${stocks.holder[0]} was selected.`) });
+      })
+
+      .then(() => {
+        return order(3000, () => { console.log(`Toppings: ${stocks.toppings[0]}`) });
+      })
+
+      .then(() => {
+        return order(2000, () => console.log("Ice-cream was served..."));
+      })
+
+      //runs only when reject
+      .catch(() => {
+        console.log("Customer left");
+      })
+
+      //runs either it is resolve or rejected
+      .finally(()=>{
+        console.log("Day ended...")
+      })
+  </script>
+</body>
+
+</html>

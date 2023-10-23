@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Async JS</title>
+</head>
+<body>
+  <script>
+    //synchronous
+    //it runs from top to bottom
+    //if one is stuck, other cannot run
+    console.log("I ");
+    console.log("eat ");
+    console.log("ice-cream ");
+    console.log("with a ");
+    console.log("spoon ");
+
+    //Asynchronous
+    console.log("I ");
+    console.log("eat ");
+    setTimeout(()=>{
+      console.log("ice-cream "); //this will not stop others
+    },2000);
+    console.log("with a ");
+    console.log("spoon ");
+    
+
+  </script>
+</body>
+</html>
