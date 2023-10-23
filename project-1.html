@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synchronous and Asynchronous Printing of Images</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .image-container img {
+      width: 150px;
+      margin: 10px;
+    }
+
+    .button-container {
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      background-color: #0077b6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #023e8a;
+    }
+
+    @media (max-width: 768px) {
+      .image-container img {
+        width: 100px;
+      }
+    }
+
+    h3 {
+  position: absolute;
+  bottom: 10px;
+  /* Adjust the distance from the bottom as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: black;
+  /* You can use a subdued color for a professional look */
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center; /* Center the text horizontally */
+  font-size: 28px; /* Adjust the font size as needed */
+  margin-top: 20px; /* Add space from the top */
+  color: black; /* Change the text color */
+  font-family: Arial, sans-serif; /* Specify a font family */
+}
+    
+  </style>
+</head>
+<body>
+  <div>
+    <h2>Synchronous and Asynchronous Printing of Images</h2>
+  </div>
+  <div class="image-container">
+  <img id="friedChicken"  src="https://static.vecteezy.com/system/resources/previews/021/620/272/original/cute-fried-chicken-cartoon-icon-illustration-food-icon-concept-illustration-suitable-for-icon-logo-sticker-clipart-free-vector.jpg" alt="friedChicken" hidden>
+
+  <img id="frenchFries" src="https://t4.ftcdn.net/jpg/01/67/43/65/360_F_167436545_jBnxJ5aMgF57oJvVEWDdo7wVonX1Trn2.jpg" alt="frenchFries" hidden>
+
+  <img id="mozarellaSticks" src="https://thumbs.dreamstime.com/b/fresh-gourmet-cheese-sticks-snack-icon-isolated-fresh-gourmet-cheese-sticks-snack-278964501.jpg" alt="mozarellaSticks" hidden>
+</div>
+<div class="button-container">
+  <button onclick="printImageSynchronous()">Show Images One at a time (Synchronously)</button> 
+</div>
+<div class="button-container"></div>
+  <button onclick="printImageAsynchronous()">Show Images all at once (Asynchronously)</button>
+</div>
+
+<h3>Developed By Bickey</h3>
+  <script>
+
+
+    function time(ms){
+      return new Promise((resolve,reject)=>{
+        if(true){
+          setTimeout(resolve,ms);
+        }else{
+          reject("Not Printing");
+        }
+      });
+    }
+
+    async function printImageSynchronous(){
+      try{
+
+        await time(1000); //if we remove await it will be asynchronous
+        document.querySelector('#friedChicken').removeAttribute('hidden');
+
+        await time(1000);
+        document.querySelector('#frenchFries').removeAttribute('hidden');
+
+        await time(1000);
+        document.querySelector('#mozarellaSticks').removeAttribute('hidden');
+
+      }catch(error){
+        console.log("Not printing",error);
+      }finally{
+        console.log("Thank You.");
+      
+        setTimeout(() => {
+          document.querySelector('#friedChicken').setAttribute('hidden', 'true');
+          document.querySelector('#frenchFries').setAttribute('hidden', 'true');
+          document.querySelector('#mozarellaSticks').setAttribute('hidden', 'true');
+        }, 2000); // Adjust the delay as needed
+      }
+    }
+
+    async function printImageAsynchronous(){
+      try{
+
+        //await time(1000); //if we remove await it will be asynchronous
+        document.querySelector('#friedChicken').removeAttribute('hidden');
+
+        //await time(2000);
+        document.querySelector('#frenchFries').removeAttribute('hidden');
+
+        //await time(3000);
+        document.querySelector('#mozarellaSticks').removeAttribute('hidden');
+
+      }catch(error){
+        console.log("Not printing",error);
+      }finally{
+        console.log("Thank You.");
+      
+        setTimeout(() => {
+          document.querySelector('#friedChicken').setAttribute('hidden', 'true');
+          document.querySelector('#frenchFries').setAttribute('hidden', 'true');
+          document.querySelector('#mozarellaSticks').setAttribute('hidden', 'true');
+        }, 2000); // Adjust the delay as needed
+      }
+    }
+  </script>
+</body>
+</html>
